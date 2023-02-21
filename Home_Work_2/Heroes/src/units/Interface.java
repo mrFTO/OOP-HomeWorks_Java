@@ -1,6 +1,6 @@
 package units;
 
-public class Interface {
+public interface Interface {
 
     void step();
 
