@@ -8,6 +8,6 @@ public class Robber extends Warrior {
 
     @Override
     public String getInfo() {
-        return "Robber" + heroID;
+        return "Robber " + heroID;
     }
 }
