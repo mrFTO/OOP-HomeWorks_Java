@@ -9,8 +9,7 @@ public abstract class BaseHero implements Interface {
     protected int attack, defense, minDamage, maxDamage, hp, maxHp, speed;
     protected Point pointXY;
 
-    public BaseHero(String name, int attack, int defense, int minDamage, int maxDamage, int hp, int speed,
-            Point pointXY) {
+    public BaseHero(String name, int attack, int defense, int minDamage, int maxDamage, int hp, int speed, int pointX, int pointY) {
         this.name = name;
         this.attack = attack;
         this.defense = defense;

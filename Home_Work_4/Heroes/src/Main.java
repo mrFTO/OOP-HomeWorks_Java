@@ -4,7 +4,6 @@ import java.util.Comparator;
 import java.util.Random;
 import java.util.Scanner;
 
-
 public class Main {
 
     static final int UNITS = 10;
@@ -48,7 +47,8 @@ public class Main {
 
     static void showTheTeam(ArrayList<BaseHero> team) {
         team.forEach(n -> System.out.println(n.getInfo()));
-        System.out.println("----------------------------------------------------------------------------------------");
+        System.out.println(
+                "--------------------------------------------------------------------------------------------------------------------------");
     }
 
     static void sortTeam(ArrayList<BaseHero> team) {
@@ -68,10 +68,10 @@ public class Main {
         for (int i = 1; i <= UNITS; i++) {
             switch (new Random().nextInt(4) + offset) {
                 case 0:
-                    team.add(new Spearmen(Spearmen.getName(), pointX, i));
+                    team.add(new Crossbowman(Crossbowman.getName(), pointX, i));
                     break;
                 case 1:
-                    team.add(new Crossbowman(Crossbowman.getName(), pointX, i));
+                    team.add(new Spearman(Spearman.getName(), pointX, i));
                     break;
                 case 2:
                     team.add(new Monk(Monk.getName(), pointX, i));

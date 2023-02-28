@@ -3,7 +3,7 @@ package units;
 public class Robber extends BaseHero {
 
     public Robber(String name, int pointX, int pointY) {
-        super(name, 3, 2, 4, 10, 6, pointX, pointY);
+        super(name, 8, 3, 2, 4, 10, 6, pointX, pointY);
     }
 
     @Override
