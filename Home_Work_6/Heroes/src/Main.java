@@ -8,16 +8,13 @@ public class Main {
 
     static final int UNITS = 10;
 
-    public static ArrayList<BaseHero> allTeam = new ArrayList<>();
-    public static ArrayList<BaseHero> blue = new ArrayList<>();
-    public static ArrayList<BaseHero> red = new ArrayList<>();
-
     public static void main(String[] args) {
 
         Scanner user_input = new Scanner(System.in);
 
-        System.out.print("Press Enter to begin.");
-        user_input.nextLine();
+        ArrayList<BaseHero> blue = new ArrayList<>();
+        ArrayList<BaseHero> red = new ArrayList<>();
+        ArrayList<BaseHero> allTeam = new ArrayList<>();
 
         createTeam(blue, 0, 1);
         createTeam(red, 3, 10);
@@ -34,30 +31,37 @@ public class Main {
         showTheTeam(red);
 
         System.out.println("Let the battle begins!");
-
-        while (true) {
-            View.view();
-            user_input.nextLine();
-            for (BaseHero baseHero : allTeam) {
-                if (blue.contains(baseHero))
-                    baseHero.step(blue, red);
+        String stop = "";
+        while (stop.equals("")) {
+            for (BaseHero hero : allTeam) {
+                if (blue.contains(hero))
+                    hero.step(blue, red);
                 else
-                    baseHero.step(red, blue);
+                    hero.step(red, blue);
             }
+            showTheTeam(allTeam);
+            stop = user_input.nextLine();
+
         }
+    }
 
-        // String stop = "";
-        // while (stop.equals("")) {
-        // for (BaseHero hero : allTeam) {
-        // if (blue.contains(hero))
-        // hero.step(blue, red);
-        // else
-        // hero.step(red, blue);
-        // }
-        // showTheTeam(allTeam);
-        // stop = user_input.nextLine();
+    static void showTheTeam(ArrayList<BaseHero> team) {
+        team.forEach(n -> System.out.println(n.getInfo()));
+        System.out.println(
+                "--------------------------------------------------------------------------------------------------------------------------");
+    }
 
-        // }
+    static void sortTeam(ArrayList<BaseHero> team) {
+        team.sort(new Comparator<BaseHero>() {
+            @Override
+            public int compare(BaseHero hero1, BaseHero hero2) {
+                if (hero2.getSpeed() == hero1.getSpeed())
+                    return hero2.getHp() - hero1.getHp();
+                else {
+                    return hero2.getSpeed() - hero1.getSpeed();
+                }
+            }
+        });
     }
 
     static void createTeam(ArrayList<BaseHero> team, int offset, int pointX) {
@@ -89,24 +93,4 @@ public class Main {
             }
         }
     }
-
-    static void sortTeam(ArrayList<BaseHero> team) {
-        team.sort(new Comparator<BaseHero>() {
-            @Override
-            public int compare(BaseHero hero1, BaseHero hero2) {
-                if (hero2.getSpeed() == hero1.getSpeed())
-                    return (int) (hero2.getHp() - hero1.getHp());
-                else {
-                    return (int) (hero2.getSpeed() - hero1.getSpeed());
-                }
-            }
-        });
-    }
-
-    static void showTheTeam(ArrayList<BaseHero> team) {
-        team.forEach(n -> System.out.println(n.getInfo()));
-        System.out.println(
-                "--------------------------------------------------------------------------------------------------------------------------");
-    }
-
 }
