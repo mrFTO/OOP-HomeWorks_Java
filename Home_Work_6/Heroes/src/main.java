@@ -1,18 +1,16 @@
 import units.*;
 
-
 import java.util.ArrayList;
-// import java.util.Collections;
 import java.util.Comparator;
 import java.util.Random;
 import java.util.Scanner;
 
 public class main {
     static final int UNITS = 10;
-    
+
     public static ArrayList<BaseHero> allTeam = new ArrayList<>();
-    public static ArrayList<BaseHero> holyTeam = new ArrayList<>();
-    public static ArrayList<BaseHero> darkTeam = new ArrayList<>();
+    public static ArrayList<BaseHero> blue = new ArrayList<>();
+    public static ArrayList<BaseHero> red = new ArrayList<>();
 
     public static void main(String[] args) {
         try (Scanner user_input = new Scanner(System.in)) {
@@ -32,7 +30,7 @@ public class main {
                 countBlue = 0;
                 countGreen = 0;
                 for (BaseHero baseHero : allTeam) {
-                    if (holyTeam.contains(baseHero)) {
+                    if (blue.contains(baseHero)) {
                         if (baseHero.step(blue, red))
                             countBlue++;
                     } else {
@@ -57,28 +55,28 @@ public class main {
             int rnd = new Random().nextInt(4) + offset;
             switch (rnd) {
                 case (0):
-                    team.add(new Sniper(getName(), new Vector2D(i + 1, posY)));
+                    team.add(new Sniper(getName(), new Point(i + 1, posY)));
                     break;
                 case (1):
-                    team.add(new Robber(getName(), new Vector2D(i + 1, posY)));
+                    team.add(new Robber(getName(), new Point(i + 1, posY)));
                     break;
                 case (2):
-                    // team.add(new Sniper(getName(), new Vector2D(i + 1, posY)));
-                    team.add(new Wizard(getName(), new Vector2D(i + 1, posY)));
+
+                    team.add(new Wizard(getName(), new Point(i + 1, posY)));
                     break;
                 case (3):
-                    team.add(new Peasant(getName(), new Vector2D(i + 1, posY)));
+                    team.add(new Peasant(getName(), new Point(i + 1, posY)));
                     break;
                 case (4):
-                    // team.add(new Sniper(getName(), new Vector2D(i + 1, posY)));
-                    team.add(new Crossbowman(getName(), new Vector2D(i + 1, posY)));
+
+                    team.add(new Crossbowman(getName(), new Point(i + 1, posY)));
                     break;
                 case (5):
-                    // team.add(new Sniper(getName(), new Vector2D(i + 1, posY)));
-                    team.add(new Monk(getName(), new Vector2D(i + 1, posY)));
+
+                    team.add(new Monk(getName(), new Point(i + 1, posY)));
                     break;
                 case (6):
-                    team.add(new Spearman(getName(), new Vector2D(i + 1, posY)));
+                    team.add(new Spearman(getName(), new Point(i + 1, posY)));
                     break;
             }
         }

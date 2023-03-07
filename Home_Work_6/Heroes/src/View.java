@@ -58,7 +58,7 @@ public class View {
             System.out.print(AnsiColors.ANSI_RED + "Step:" + step + AnsiColors.ANSI_RESET);
         }
         step++;
-        Main.allTeam.forEach((v) -> l[0] = Math.max(l[0], v.toString().length()));
+        main.allTeam.forEach((v) -> l[0] = Math.max(l[0], v.toString().length()));
         System.out.print("_".repeat(l[0] * 2));
         System.out.println("");
         System.out.print(top10 + "    ");
@@ -70,9 +70,9 @@ public class View {
             System.out.print(getChar(1, i));
         }
         System.out.print("|    ");
-        System.out.print(Main.blue.get(0));
-        tabSetter(Main.blue.get(0).toString().length(), l[0]);
-        System.out.println(Main.red.get(0));
+        System.out.print(main.blue.get(0));
+        tabSetter(main.blue.get(0).toString().length(), l[0]);
+        System.out.println(main.red.get(0));
         System.out.println(midl10);
 
         for (int i = 2; i < 9; i++) {
@@ -80,18 +80,18 @@ public class View {
                 System.out.print(getChar(i, j));
             }
             System.out.print("|    ");
-            System.out.print(Main.blue.get(i - 1));
-            tabSetter(Main.blue.get(i - 1).toString().length(), l[0]);
-            System.out.println(Main.red.get(i - 1));
+            System.out.print(main.blue.get(i - 1));
+            tabSetter(main.blue.get(i - 1).toString().length(), l[0]);
+            System.out.println(main.red.get(i - 1));
             System.out.println(midl10);
         }
         for (int j = 1; j < 11; j++) {
             System.out.print(getChar(10, j));
         }
         System.out.print("|    ");
-        System.out.print(Main.blue.get(9));
-        tabSetter(Main.blue.get(9).toString().length(), l[0]);
-        System.out.println(Main.red.get(9));
+        System.out.print(main.blue.get(9));
+        tabSetter(main.blue.get(9).toString().length(), l[0]);
+        System.out.println(main.red.get(9));
         System.out.println(bottom10);
     }
 }

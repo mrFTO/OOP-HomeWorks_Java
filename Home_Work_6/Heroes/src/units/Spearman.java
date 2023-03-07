@@ -1,16 +1,19 @@
 package units;
 
-public class Spearman extends BaseHero {
+public class Spearman extends Warrior {
 
-    public Spearman(String name, int pointX, int pointY) {
-        super(name, 4, 5, 1, 3, 10, 4, pointX, pointY);
+    public Spearman(String name, Point coords) {
+        super(name, 70.f, 70, 10, 2, 4, 10,
+                6, coords.posX, coords.posY);
     }
 
     @Override
-    public String getInfo() {
-        return String.format("%7S %10s %13s %7s %3d %10s %3d %7s %2d %2d %10s %3d %10s %3d",
-                state, "Spearman", name, "Attack:", attack, "Defense:", defense, "Damage:", minDamage, maxDamage,
-                "Health:", hp,
-                "Speed:", speed);
+    public StringBuilder getInfo() {
+        StringBuilder builder = new StringBuilder();
+        return builder.append("Spearman:\t").append(Spearman.super.name)
+                .append("\t| ATK:\t").append(Spearman.super.attack)
+                .append("\t| HP:\t").append(Spearman.super.hp)
+                .append(" \t|\t\t\t|").append("\t| (X.Y) : ").append(Spearman.super.coords.posX).append(".")
+                .append(Spearman.super.coords.posY);
     }
 }

@@ -10,7 +10,7 @@ public class Crossbowman extends Shooter {
     @Override
     public StringBuilder getInfo() {
         StringBuilder builder = new StringBuilder();
-        return builder.append("Арбалет: \t").append(Crossbowman.super.name)
+        return builder.append("Crossbowman: \t").append(Crossbowman.super.name)
                 .append("\t| ATK:\t").append(Crossbowman.super.attack)
                 .append("\t| HP:\t").append(Crossbowman.super.hp)
                 .append(" \t| Arrows:").append(Crossbowman.super.cartridges)
