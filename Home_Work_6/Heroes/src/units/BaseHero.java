@@ -5,81 +5,84 @@ import java.util.Random;
 
 public abstract class BaseHero implements Interface {
 
-    protected String name, state;
-    protected int attack, defense, minDamage, maxDamage, hp, maxHp, speed;
-    protected Point pointXY;
-    protected static int heroCount;
+    protected String name;
+    protected float hp;
+    protected int maxHp;
+    protected int attack;
+    protected int damageMin;
+    protected int damageMax;
+    protected int defense;
+    protected int speed;
+    protected Point coords;
+    protected String state;
+    protected static int heroCnt;
 
-    // @Override
-    // public String toString() {
-    // return name +
-    // " H:" + Math.round(hp) +
-    // " D:" + defense +
-    // " A:" + attack +
-    // " Dmg:" + Math.round(Math.abs((damageMin + damageMax) / 2)) +
-    // " " + state;
-    // }
+    @Override
+    public String toString() {
+        return name +
+                " H:" + Math.round(hp) +
+                " D:" + defense +
+                " A:" + attack +
+                " Dmg:" + Math.round(Math.abs((damageMin + damageMax) / 2)) +
+                " " + state;
+    }
 
     public int[] getCoords() {
-        return new int[] { pointXY.x, pointXY.y };
+        return new int[] { coords.posX, coords.posY };
     }
 
-    public BaseHero(String name, int attack, int defense, int minDamage, int maxDamage, int hp, int speed, int pointX,
-            int pointY) {
+    protected BaseHero(String name, float hp, int maxHp, int attack, int damageMin,
+                    int damageMax, int defense, int speed, int posX, int posY) {
         this.name = name;
-        this.attack = attack;
-        this.defense = defense;
-        this.minDamage = minDamage;
-        this.maxDamage = maxDamage;
         this.hp = hp;
-        this.maxHp = hp;
+        this.maxHp = maxHp;
+        this.attack = attack;
+        this.damageMin = damageMin;
+        this.damageMax = damageMax;
+        this.defense = defense;
         this.speed = speed;
-        pointXY = new Point(pointX, pointY);
+        coords = new Point(posX, posY);
         state = "Stand";
-        heroCount++;
-    }
-
-    public static String getName() {
-        return String.valueOf(Names.values()[new Random().nextInt(0, Names.values().length)]);
-    }
-
-    public int getHp() {
-        return hp;
+        heroCnt++;
     }
 
     public int getSpeed() {
         return speed;
     }
 
-    @Override
-    public void step(ArrayList<BaseHero> team1, ArrayList<BaseHero> team2) {
+    public float getHp() {
+        return hp;
     }
 
     @Override
-    public String getInfo() {
-        return "null";
+    public boolean step(ArrayList<BaseHero> team1, ArrayList<BaseHero> team2) {
+        return true;
     }
 
-    public void getDamage(float damage) {
+    public int findNearest(ArrayList<BaseHero> team) {
+        int index = 0;
+        double min = Double.MAX_VALUE;
+        for (int i = 0; i < team.size(); i++) {
+            if (min > coords.getDistance(team.get(i).coords) && !team.get(i).state.equals("Die")) {
+                index = i;
+                min = coords.getDistance(team.get(i).coords);
+            }
+        }
+        return index;
+    }
+
+    protected void getDamage(float damage) {
         this.hp -= damage;
         if (hp <= 0) {
             hp = 0;
             state = "Die";
-        } else if (hp > maxHp) {
-            hp = maxHp;
         }
-
+        if (hp > maxHp)
+            hp = maxHp;
     }
 
-    protected int findTheNearest(ArrayList<BaseHero> team) {
-        double min = Double.MAX_VALUE;
-        int index = 0;
-        for (int i = 0; i < team.size(); i++) {
-            if (min > pointXY.getDistance(team.get(i).pointXY)) {
-                index = i;
-                min = pointXY.getDistance(team.get(i).pointXY);
-            }
-        }
-        return index;
+    @Override
+    public StringBuilder getInfo() {
+        return new StringBuilder("");
     }
 }

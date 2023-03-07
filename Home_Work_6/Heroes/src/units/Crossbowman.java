@@ -2,16 +2,20 @@ package units;
 
 public class Crossbowman extends Shooter {
 
-    public Crossbowman(String name, int pointX, int pointY) {
-        super(name, 6, 3, 2, 3, 10, 4, 16, pointX, pointY);
+    public Crossbowman(String name, Point coords) {
+        super(name, 60.f, 60, 7, 3, 7, 4,
+                9, 20, 10, coords.posX, coords.posY);
     }
 
     @Override
-    public String getInfo() {
-        return String.format("%7S %10s %13s %7s %3d %10s %3d %7s %2d %2d %10s %3d %10s %3d %10s %3d",
-                state, "Crossbowman", name, "Attack:", attack, "Defense:", defense, "Damage:", minDamage, maxDamage,
-                "Health:", hp,
-                "Speed:", speed, "Ammo:", ammo);
+    public StringBuilder getInfo() {
+        StringBuilder builder = new StringBuilder();
+        return builder.append("Арбалет: \t").append(Crossbowman.super.name)
+                .append("\t| ATK:\t").append(Crossbowman.super.attack)
+                .append("\t| HP:\t").append(Crossbowman.super.hp)
+                .append(" \t| Arrows:").append(Crossbowman.super.cartridges)
+                .append("\t|").append("\t| (X.Y) : ").append(Crossbowman.super.coords.posX).append(".")
+                .append(Crossbowman.super.coords.posY);
     }
 
 }

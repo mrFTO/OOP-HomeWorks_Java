@@ -35,15 +35,15 @@ public class View {
 
     private static String getChar(int a, int b) {
         String out = "| ";
-            for (BaseHero baseHero : Main.allTeam) {
+            for (BaseHero baseHero : main.allTeam) {
                 if (baseHero.getCoords()[0] == a && baseHero.getCoords()[1] == b) {
                     if (baseHero.getHp() == 0) {
                     out = "|" + (AnsiColors.ANSI_RED + baseHero.getInfo().charAt(0) + AnsiColors.ANSI_RESET);
                     break;
                 }
-                if (Main.red.contains(baseHero))
+                if (main.red.contains(baseHero))
                     out = "|" + (AnsiColors.ANSI_GREEN + baseHero.getInfo().charAt(0) + AnsiColors.ANSI_RESET);
-                if (Main.blue.contains(baseHero))
+                if (main.blue.contains(baseHero))
                     out = "|" + (AnsiColors.ANSI_BLUE + baseHero.getInfo().charAt(0) + AnsiColors.ANSI_RESET);
                 break;
             }

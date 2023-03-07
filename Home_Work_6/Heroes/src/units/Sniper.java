@@ -2,17 +2,19 @@ package units;
 
 public class Sniper extends Shooter {
 
-    public Sniper(String name, int pointX, int pointY) {
-        super(name, 12, 10, 8, 10, 15, 9, 32, pointX, pointY);
+    public Sniper(String name, Point coords) {
+        super(name, 60.f, 60, 10, 3, 5, 3,
+                9, 20, 10, coords.posX, coords.posY);
     }
 
     @Override
-    public String getInfo() {
-        return String.format("%7S %10s %13s %7s %3d %10s %3d %7s %2d %2d %10s %3d %10s %3d %10s %3d",
-                state, "Sniper", name, "Attack:", attack, "Defense:", defense, "Damage:", minDamage, maxDamage,
-                "Health:", hp,
-                "Speed:", speed, "Ammo:", ammo);
+    public StringBuilder getInfo() {
+        StringBuilder builder = new StringBuilder();
+        return builder.append("Снайпер:\t").append(Sniper.super.name)
+                .append("\t| ATK:\t").append(Sniper.super.attack)
+                .append("\t| HP:\t").append(Sniper.super.hp)
+                .append(" \t| Arrows:").append(Sniper.super.cartridges)
+                .append("\t|").append("\t| (X.Y) : ").append(Sniper.super.coords.posX).append(".").append(Sniper.super.coords.posY);
     }
-
    
 }

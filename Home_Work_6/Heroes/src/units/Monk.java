@@ -2,16 +2,21 @@ package units;
 
 public class Monk extends Priest {
 
-    public Monk(String name, int pointX, int pointY) {
-        super(name, 12, 7, -4, -4, 30, 5, 10, pointX, pointY);
+    public Monk(String name, Point coords) {
+        super(name, 50.f, 50, 10, -7, -7, 3,
+                7, 5, 5, coords.posX, coords.posY);
+
     }
 
     @Override
-    public String getInfo() {
-        return String.format("%7S %10s %13s %7s %3d %10s %3d %7s %2d %2d %10s %3d %10s %3d %10s %3d",
-                state, "Monk", name, "Attack:", attack, "Defence:", defense, "Damage:", minDamage, maxDamage, "Health:",
-                hp,
-                "Speed:", speed, "Mana:", mana);
+    public StringBuilder getInfo() {
+        StringBuilder builder = new StringBuilder();
+        return builder.append("Monk:  \t").append(Monk.super.name)
+                .append("\t| ATK:\t").append(Monk.super.attack)
+                .append("\t| HP:\t").append(Monk.super.hp)
+                .append(" \t| MP:\t").append(Monk.super.mana)
+                .append("\t|").append("\t| (X.Y) : ").append(Monk.super.coords.posX).append(".")
+                .append(Monk.super.coords.posY);
     }
 
 }

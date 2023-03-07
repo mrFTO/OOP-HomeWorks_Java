@@ -4,34 +4,23 @@ import java.util.ArrayList;
 
 public class Priest extends BaseHero {
     protected int mana;
+    protected int maxMana;
 
-    public Priest(String name, int attack, int defense, int minDamage, int maxDamage, int hp, int speed, int mana, int pointX, int pointY) {
-        super(name, attack, defense, minDamage, maxDamage, hp, speed, pointX, pointY);
-        this.mana = mana;
-    }
-    
     @Override
-    public void step(ArrayList<BaseHero> ours, ArrayList<BaseHero> foreign) {
-        if (state.equals("Die") || mana <= 0)
-            return;
-        BaseHero victim = findTheMostWounded(ours);
-        victim.getDamage(minDamage);
-        mana--;
-
-        if (mana <= 0)
-            mana += 5;
-    }
-
-    protected BaseHero findTheMostWounded(ArrayList<BaseHero> ours) {
-        double minHp = Double.MAX_VALUE;
-        int index = 0;
-        for (int i = 0; i < ours.size(); i++) {
-            BaseHero character = ours.get(i);
-            if (minHp > character.maxHp - character.hp) {
-                index = i;
-                minHp = character.maxHp - character.hp;
+    public boolean step(ArrayList<BaseHero> team1, ArrayList<BaseHero> team2) {
+        for (BaseHero baseHero : team1) {
+            if (baseHero.hp < baseHero.maxHp & !baseHero.state.equals("Die")) {
+                baseHero.getDamage(damageMax);
+                return false;
             }
         }
-        return ours.get(index);
+        return true;
+    }
+
+    public Priest(String name, float hp, int maxHp, int attack, int damageMin, int damageMax, int defense,
+               int speed, int mana, int maxMana, int posX, int posY) {
+        super(name, hp, maxHp, attack, damageMin, damageMax, defense, speed, posX, posY);
+        this.mana = mana;
+        this.maxMana = maxMana;
     }
 }

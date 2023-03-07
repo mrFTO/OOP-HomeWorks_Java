@@ -4,28 +4,43 @@ import java.util.ArrayList;
 
 public abstract class Shooter extends BaseHero {
 
-    protected int ammo;
+    protected int range;
+    protected int cartridges;
 
-    public Shooter(String name, int attack, int defense, int minDamage, int maxDamage, int hp, int speed, int ammo,
-            int pointX, int pointY) {
-        super(name, attack, defense, minDamage, maxDamage, hp, speed, pointX, pointY);
-        this.ammo = ammo;
+    protected Shooter(String name, float hp, int maxHp, int attack, int damageMin,
+            int damageMax, int defense, int speed, int cartridges,
+            int range, int posX, int posY) {
+        super(name, hp, maxHp, attack, damageMin, damageMax, defense, speed, posX, posY);
+        this.range = range;
+        this.cartridges = cartridges;
     }
 
     @Override
-    public void step(ArrayList<BaseHero> ours, ArrayList<BaseHero> foreign) {
-        if (state.equals("Die") || (ammo == 0))
+    public void step(ArrayList<BaseHero> team1, ArrayList<BaseHero> team2) {
+        if (state.equals("Die") || cartridges == 0)
             return;
-        BaseHero victim = foreign.get(findTheNearest(foreign));
-        float damage = (victim.defense - attack) > 0 ? minDamage
-                : (victim.defense - attack) < 0 ? maxDamage : (minDamage + maxDamage) / 2;
+        BaseHero victim = team2.get(findNearest(team2));
+        float damage = (victim.defense - attack) > 0 ? damageMin
+                : (victim.defense - attack) < 0 ? damageMax : (damageMin + damageMax) / 2;
         victim.getDamage(damage);
-        for (BaseHero hero : ours) {
-            if (hero.getInfo().split(" ")[0].equals("Peasant") && hero.state.equals("Stand"))
-                ;
-            hero.state = "Busy";
-            return;
+        for (BaseHero baseHero : team1) {
+            if (baseHero.getInfo().toString().split(":")[0].equals("Peasant") && baseHero.state.equals("Stand")) {
+                baseHero.state = "Busy";
+                return;
+            }
         }
-        ammo--;
+        cartridges--;
     }
+
+    @Override
+    public String toString() {
+        return name +
+                " H:" + Math.round(hp) +
+                " D:" + defense +
+                " A:" + attack +
+                " Dmg:" + Math.round(Math.abs((damageMin + damageMax) / 2)) +
+                " Shots:" + cartridges + " " +
+                state;
+    }
+
 }
